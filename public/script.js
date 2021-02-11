@@ -1,39 +1,36 @@
 var socket = io();
 
 function setup() {
-	// noStroke();
+    var matrix = [];
 
-	const side = config("side");
+    const main = (data) => {
+        matrix = data.matrix;
+        let entities = data.entities;
+        let bgColor = data.bgColor;
+        let side = data.side;
+        let ANIMAL = data.animal;
+        let GROUND = data.ground;
 
-	var matrix = [];
+        createCanvas(matrix[0].length * side, matrix.length * side);
+        background(bgColor);
 
-	const main = data => {
-		matrix = data.matrix;
-		let entities = data.entities;
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[i].length; j++) {
+                entities.map((entity) => {
+                    if (matrix[i][j][entity.type] === entity.id) {
+                        strokeWeight(entity.stroke);
+                        fill(entity.color);
 
-		createCanvas(matrix[0].length * side, matrix.length * side);
+                        if (entity.type === ANIMAL) {
 
-		background("#acacac");
+                        } else if (entity.type === GROUND) {
+                            rect(j * side, i * side, side, side);
+                        }
+                    }
+                });
+            }
+        }
+    };
 
-		for (let i = 0; i < matrix.length; i++) {
-			for (let j = 0; j < matrix[i].length; j++) {
-				// if (matrix[i][j] == 1) {
-				// 	image(img, j * side, i * side, side, side);
-				// 	continue;
-				// } else if (matrix[i][j] == 2) {
-				// 	image(img2, j * side, i * side, side, side);
-				// 	continue;
-				// } else if (matrix[i][j] == 0) fill("green");
-				// else if (matrix[i][j] == 3) fill("red");
-				// else if (matrix[i][j] == 4) fill("blue");
-				// else if (matrix[i][j] == 5) fill("yellow");
-
-                if(matrix[i][j][0] === 0) fill(entities.ground.color);
-
-				rect(j * side, i * side, side, side);
-			}
-		}
-	};
-
-	socket.on("data", main);
+    socket.on("data", main);
 }

@@ -6,8 +6,10 @@ String.prototype.lcfirst = function () {
     return this[0].toLowerCase() + this.slice(1);
 };
 
-const config = key => {
+const config = (key, value = null) => {
     let [path, name] = key.split(".");
+
+    if(value !== null) require("./config/" + path)[name] = value;
 
     return require("./config/" + path)[name];
 };
