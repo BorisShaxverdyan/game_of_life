@@ -115,6 +115,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-#rsa
+# rsa
 git_rsa
 git_rsa.pub
+
+# temp
+temp.js

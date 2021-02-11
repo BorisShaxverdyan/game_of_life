@@ -16,8 +16,8 @@ server.listen(config("app.port"));
 
 // #region MAIN
 const matrix = new (require("./Services/Golm"))(
-    config("game.width"),
-    config("game.height")
+	config("game.width"),
+	config("game.height")
 );
 const entities = config("entities.list");
 const bgColor = config("game.background");
@@ -27,22 +27,22 @@ const ground = config("entities.ground");
 const animal = config("entities.animal");
 
 const main = () => {
-    if (!config("game.status")) {
-        return;
-    }
+	if (!config("game.status")) {
+		return;
+	}
 
-    let sendData = {
-        matrix,
-        entities,
+	let sendData = {
+		matrix,
+		entities,
 
-        bgColor,
-        side,
+		bgColor,
+		side,
 
-        ground,
-        animal,
-    };
+		ground,
+		animal,
+	};
 
-    io.sockets.emit("data", sendData);
+	io.sockets.emit("data", sendData);
 };
 
 setInterval(main, 1000);
