@@ -1,0 +1,116 @@
+[
+	{
+		"name": "Entities",
+		"description": [
+			"Add entities",
+			"Use Inheritance",
+			{
+				"list": [
+					"Grass",
+					"Pig",
+					"Wolf",
+					"Human",
+					"Rabbit",
+					"God",
+					"GrassEater",
+					"Predator",
+					"PredatorEater",
+					"LiveForm",
+					"Environment",
+					"Nature",
+					"Deer",
+					"Sheep",
+					"Cheetah",
+					"Turritopsis",
+					"Aquatic",
+					"Land",
+					"Fish",
+					"Shark"
+				]
+			}
+		]
+	},
+	{
+		"name": "Coords",
+		"description": [
+			"Add Coords to config (game) / coords format ({x}, {y})",
+			"Add Coords to client / Show coordination lines x, y",
+			"Add Coords class in Client? Yeap!"
+		]
+	},
+	{
+		"name": "Foods",
+		"description": [
+			"Interaction menu for selecting foods that eat each entity? => Create animals(select what they whould eat, special attributes)",
+			"In Config file setup the foods that each entity eat"
+		]
+	},
+	{
+		"name": "Program",
+		"description": ["Status of game = STOPPED || RUNNING"]
+	},
+	{
+		"name": "Collection && Collections",
+		"description": [
+			"Create Collection and Collections classes",
+			"Use that classes for entities",
+			"Use Collections for easy run of all entities"
+		]
+	},
+	{
+		"name": "Directions",
+		"description": [
+			"Create Directions class",
+			"Use it for determining how 'faster'(cells per second) can move"
+		]
+	},
+	{
+		"name": "Matrix && Golm",
+		"description": [
+			"Create Matrix and Golm classes",
+			"Use it for easy manipulating with matrix"
+		]
+	},
+	{
+		"name": "Timer",
+		"description": ["Create game timer on server and in view"]
+	},
+	{
+		"name": "God",
+		"description": [
+			"Create God class",
+			"Use it for creating entities when they disappear or set the new era",
+			"Use it for animating world creation"
+		]
+	},
+	{
+		"name": "Console && Administrator console",
+		"description": [
+			"Add Console and AdministratorConsole classes",
+			"Use it for perform commands from view, or for viewing, debuging, or error log data"
+		]
+	},
+	{
+		"name": "Seasons",
+		"description": "Create Seasons class"
+	},
+	{
+		"name": "Gender",
+		"description": "Create Gender class"
+	},
+	{
+		"name": "Publisher",
+		"description": [
+			"Create Publisher class",
+			"Publisher Container pattern || event patterns",
+			"In typescript variant"
+		]
+	},
+	{
+		"name": "Canvas",
+		"description": [
+			"Create Canvas class in client",
+			"Use it for easy initialize Canvas"
+		]
+	}
+]
