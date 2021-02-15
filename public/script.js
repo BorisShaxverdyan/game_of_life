@@ -3,7 +3,7 @@ var socket = io();
 function setup() {
 	var matrix = [];
 
-	const main = data => {
+	const program = data => {
 		matrix = data.matrix;
 		let entities = data.entities;
 		let bgColor = data.bgColor;
@@ -31,5 +31,5 @@ function setup() {
 		}
 	};
 
-	socket.on("data", main);
+	socket.on("data", program);
 }

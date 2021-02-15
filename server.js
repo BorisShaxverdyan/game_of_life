@@ -1,10 +1,11 @@
 const helper = require("./helper");
 const config = helper.config;
+const { Collections } = require("./services/Collection");
 
 // #region SERVER
 var express = require("express");
 var app = express();
-var server = require("http").Server(app);
+var server = require("http").createServer(app);
 var io = require("socket.io")(server);
 
 app.use(express.static("public"));
@@ -14,36 +15,53 @@ app.get("/", ({ res }) => res.redirect("public/index.html"));
 server.listen(config("app.port"));
 // #endregion
 
-// #region MAIN
-const matrix = new (require("./Services/Golm"))(
-	config("game.width"),
-	config("game.height")
-);
-const entities = config("entities.list");
-const bgColor = config("game.background");
-const side = config("game.side");
+io.on("connection", function (socket) {
+	var collections = {};
 
-const ground = config("entities.ground");
-const animal = config("entities.animal");
+	const entitiesMatrix = config("entities.listMatrix");
+	const bgColor = config("game.background");
+	const side = config("game.side");
 
-const main = () => {
-	if (!config("game.status")) {
-		return;
-	}
+	const ground = config("entities.ground");
+	const animal = config("entities.animal");
 
-	let sendData = {
-		matrix,
-		entities,
+	const width = config("game.width");
+	const height = config("game.height");
 
-		bgColor,
-		side,
+	const matrix = new (require("./Services/Golm"))(width, height, entitiesMatrix);
 
-		ground,
-		animal,
+	// #region CREATE_OBJECTS
+	matrix.mapMatrix((groundId, animalId, x, y) => {
+		entitiesMatrix.map(entity => {
+			if (entity.object) {
+				if (
+					(entity.type === ground && entity.id === groundId) ||
+					(entity.type === animal && entity.id === animalId)
+				) {
+					Collections.addOrCreateCollection(collections, entity.object, x, y);
+				}
+			}
+		});
+	});
+
+	collections = new Collections(collections);
+	// #endregion
+
+	const entitiesView = config("entities.listView");
+	const main = () => {
+		let sendData = {
+			matrix,
+			entities: entitiesView,
+
+			bgColor,
+			side,
+
+			ground,
+			animal,
+		};
+
+		socket.emit("data", sendData);
 	};
 
-	io.sockets.emit("data", sendData);
-};
-
-setInterval(main, 1000);
-// #endregion
+	setInterval(main, 1000);
+});
