@@ -1,6 +1,7 @@
 [
 	{
 		"name": "Entities",
+		"status": "started",
 		"description": [
 			"Add entities",
 			"Use Inheritance",
@@ -32,6 +33,7 @@
 	},
 	{
 		"name": "Coords",
+		"status": "planned",
 		"description": [
 			"Add Coords to config (game) / coords format ({x}, {y})",
 			"Add Coords to client / Show coordination lines x, y",
@@ -40,6 +42,7 @@
 	},
 	{
 		"name": "Foods",
+		"status": "planned",
 		"description": [
 			"Interaction menu for selecting foods that eat each entity? => Create animals(select what they whould eat, special attributes)",
 			"In Config file setup the foods that each entity eat"
@@ -47,10 +50,12 @@
 	},
 	{
 		"name": "Program",
+		"status": "started",
 		"description": ["Status of game = STOPPED || RUNNING"]
 	},
 	{
 		"name": "Collection && Collections",
+		"status": "completed",
 		"description": [
 			"Create Collection and Collections classes",
 			"Use that classes for entities",
@@ -59,6 +64,7 @@
 	},
 	{
 		"name": "Directions",
+		"status": "planned",
 		"description": [
 			"Create Directions class",
 			"Use it for determining how 'faster'(cells per second) can move"
@@ -66,6 +72,7 @@
 	},
 	{
 		"name": "Matrix && Golm",
+		"status": "completed",
 		"description": [
 			"Create Matrix and Golm classes",
 			"Use it for easy manipulating with matrix"
@@ -73,10 +80,12 @@
 	},
 	{
 		"name": "Timer",
+		"status": "planned",
 		"description": ["Create game timer on server and in view"]
 	},
 	{
 		"name": "God",
+		"status": "planned",
 		"description": [
 			"Create God class",
 			"Use it for creating entities when they disappear or set the new era",
@@ -85,6 +94,7 @@
 	},
 	{
 		"name": "Console && Administrator console",
+		"status": "planned",
 		"description": [
 			"Add Console and AdministratorConsole classes",
 			"Use it for perform commands from view, or for viewing, debuging, or error log data"
@@ -92,14 +102,17 @@
 	},
 	{
 		"name": "Seasons",
+		"status": "planned",
 		"description": "Create Seasons class"
 	},
 	{
 		"name": "Gender",
+		"status": "planned",
 		"description": "Create Gender class"
 	},
 	{
 		"name": "Publisher",
+		"status": "planned",
 		"description": [
 			"Create Publisher class",
 			"Publisher Container pattern || event patterns",
@@ -108,6 +121,7 @@
 	},
 	{
 		"name": "Canvas",
+		"status": "planned",
 		"description": [
 			"Create Canvas class in client",
 			"Use it for easy initialize Canvas"
