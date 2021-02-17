@@ -1,5 +1,9 @@
 [
 	{
+		"name": "Coordinate class",
+		"status": "planned"
+	},
+	{
 		"name": "Entities",
 		"status": "started",
 		"description": [

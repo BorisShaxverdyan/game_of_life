@@ -121,3 +121,6 @@ git_rsa.pub
 
 # temp
 temp.js
+test.js
+info.json
+package-lock.json

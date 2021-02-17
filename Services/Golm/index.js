@@ -10,15 +10,15 @@ class Golm extends Array {
 		this.height = height;
 		this.entities = entities;
 
-		for (let i = 0; i < height; i++) {
-			this[i] = [];
-
-			for (let j = 0; j < width; j++) {
-				this[i][j] = [0, 0];
+		if (entities) {
+			for (let i = 0; i < height; i++) {
+				this[i] = [];
+	
+				for (let j = 0; j < width; j++) {
+					this[i][j] = [0, 0];
+				}
 			}
-		}
-
-		if(entities) {
+			
 			this.generate(entities);
 		}
 	}
@@ -37,14 +37,11 @@ class Golm extends Array {
 	}
 
 	setRandom(type, value) {
-		if (
-			this[Random.number(0, this.height - 1)][
-				Random.number(0, this.width - 1)
-			][type] === 0
-		) {
-			this[Random.number(0, this.height - 1)][
-				Random.number(0, this.width - 1)
-			][type] = value;
+		let height = Random.number(0, this.height - 1);
+		let width = Random.number(0, this.width - 1);
+
+		if (this[height][width][type] === 0) {
+			this[height][width][type] = value;
 
 			return true;
 		}
@@ -53,8 +50,10 @@ class Golm extends Array {
 	}
 
 	mapMatrix(callback) {
-		return this.map((arr, y) => arr.map((item, x) => callback(item[0], item[1], x, y)));
-    }
+		return this.map((arr, y) =>
+			arr.map((item, x) => callback(item[0], item[1], x, y))
+		);
+	}
 }
 
 module.exports = Golm;
