@@ -11,9 +11,18 @@ const ANIMAL = 1;
 const list = [
 	{
 		id: 0,
-		name: "ground",
+		name: "emptyGround",
 		object: null,
 		type: GROUND,
+		color: config("game.background"),
+		stroke: 0,
+		count: 0,
+	},
+	{
+		id: 0,
+		name: "emptyAnimal",
+		object: null,
+		type: ANIMAL,
 		color: config("game.background"),
 		stroke: 0,
 		count: 0,
@@ -25,21 +34,26 @@ const list = [
 		type: GROUND,
 		color: "green",
 		stroke: 0,
-		count: 5,
+		count: 2,
 	},
 ];
 
 const configs = {
-	listMatrix: list.map(entity => {
-		if(entity.object) {
-			return {
-				id: entity.id,
-				type: entity.type,
-				count: entity.count,
-				object: entity.object,
+	listMatrix: list
+		.map(entity => {
+			if (entity.object) {
+				entity.object.id = entity.id;
+				entity.object.type = entity.type;
+
+				return {
+					id: entity.id,
+					type: entity.type,
+					count: entity.count,
+					object: entity.object,
+				};
 			}
-		}
-	}).filter(entity => !!entity),
+		})
+		.filter(entity => !!entity),
 
 	listView: list.map(entity => ({
 		id: entity.id,
@@ -59,6 +73,8 @@ const configs = {
 	animal: ANIMAL,
 };
 
-for (let config in configs) {
-	module.exports[config] = configs[config];
+for (let i = 0; i < list.length; i++) {
+	configs[list[i].name + "ID"] = list[i].id;
 }
+
+for (let one in configs) module.exports[one] = configs[one];

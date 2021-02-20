@@ -1,6 +1,12 @@
-const helper = require("./helper");
-const config = helper.config;
+const { config } = require("./helper");
+const Golm = require("./services/Golm");
+
+const entitiesMatrix = config("entities.listMatrix");
+
+const matrix = Golm.instance.generate(entitiesMatrix);
 const { Collections } = require("./services/Collection");
+const Directions = require("./services/Directions");
+const Position = require("./services/Position");
 
 // #region SERVER
 var express = require("express");
@@ -12,42 +18,34 @@ app.use(express.static("public"));
 
 app.get("/", ({ res }) => res.redirect("public/index.html"));
 
-server.listen(config("app.port"));
+server.listen(config("app.port"), () => console.log("Server running"));
 // #endregion
 
-io.on("connection", function (socket) {
-	var collections = {};
+const bgColor = config("game.background");
+const side = config("game.side");
 
-	const entitiesMatrix = config("entities.listMatrix");
-	const bgColor = config("game.background");
-	const side = config("game.side");
+const ground = config("entities.ground");
+const animal = config("entities.animal");
+Directions.matrix = matrix;
 
-	const ground = config("entities.ground");
-	const animal = config("entities.animal");
-
-	const width = config("game.width");
-	const height = config("game.height");
-
-	const matrix = new (require("./Services/Golm"))(width, height, entitiesMatrix);
-
-	// #region CREATE_OBJECTS
-	matrix.mapMatrix((groundId, animalId, x, y) => {
-		entitiesMatrix.map(entity => {
-			if (entity.object) {
-				if (
-					(entity.type === ground && entity.id === groundId) ||
-					(entity.type === animal && entity.id === animalId)
-				) {
-					Collections.addOrCreateCollection(collections, entity.object, x, y);
-				}
+// #region CREATE_OBJECTS
+matrix.mapMatrix((groundId, animalId, x, y) => {
+	entitiesMatrix.map(entity => {
+		if (entity.object) {
+			if (
+				(entity.type === ground && entity.id === groundId) ||
+				(entity.type === animal && entity.id === animalId)
+			) {
+				Collections.addOrCreateCollection(entity.object, new Position(x, y));
 			}
-		});
+		}
 	});
+});
+// #endregion
 
-	collections = new Collections(collections);
-	// #endregion
+const entitiesView = config("entities.listView");
 
-	const entitiesView = config("entities.listView");
+io.on("connection", function (socket) {
 	const main = () => {
 		let sendData = {
 			matrix,
@@ -61,7 +59,8 @@ io.on("connection", function (socket) {
 		};
 
 		socket.emit("data", sendData);
+		Collections.run();
 	};
 
-	setInterval(main, 1000);
+	setInterval(main, 100);
 });

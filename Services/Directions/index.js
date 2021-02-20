@@ -1,3 +1,5 @@
+const Position = require("../Position");
+
 class Directions {
 	/**
 	 * Target matrix
@@ -7,25 +9,24 @@ class Directions {
 	/**
 	 * Get all coordinates in perimeter
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 * @param {number} radius radius
 	 */
-	static get(x, y, radius) {
+	static get(position, radius) {
 		let matrix = this.matrix;
 
 		let result = [];
 
-		let XRMinus = x - radius < 0 ? 0 : x - radius;
-		let XRPlus = x + radius > matrix[0].length - 1 ? matrix[0].length - 1 : x + radius;
-		let YRMinus = y - radius < 0 ? 0 : y - radius;
-		let YRPlus = y + radius > matrix.length - 1 ? matrix.length - 1 : y + radius;
+		let XRMinus = position.x - radius < 0 ? 0 : position.x - radius;
+		let XRPlus = position.x + radius > matrix[0].length - 1 ? matrix[0].length - 1 : position.x + radius;
+		let YRMinus = position.y - radius < 0 ? 0 : position.y - radius;
+		let YRPlus = position.y + radius > matrix.length - 1 ? matrix.length - 1 : position.y + radius;
 
 		for (let i = YRMinus; i <= YRPlus; i++) {
 			for (let j = XRMinus; j <= XRPlus; j++) {
-				if (i === y && j === x) continue;
+				if (i === position.y && j === position.x) continue;
 
-				result.push([j, i]);
+				result.push(new Position(j, i));
 			}
 		}
 
@@ -37,11 +38,10 @@ class Directions {
 	 *
 	 * Radius = 1
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 */
-	static small(x, y) {
-		return this.get(x, y, 1);
+	static small(position) {
+		return this.get(position, 1);
 	}
 
 	/**
@@ -49,11 +49,10 @@ class Directions {
 	 *
 	 * Radius = 2
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 */
-	static medium(x, y) {
-		return this.get(x, y, 2);
+	static medium(position) {
+		return this.get(position, 2);
 	}
 
 	/**
@@ -61,11 +60,10 @@ class Directions {
 	 *
 	 * Radius = 3
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 */
-	static large(x, y) {
-		return this.get(x, y, 3);
+	static large(position) {
+		return this.get(position, 3);
 	}
 
 	/**
@@ -73,11 +71,10 @@ class Directions {
 	 *
 	 * Radius = 4
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 */
-	static xLarge(x, y) {
-		return this.get(x, y, 4);
+	static xLarge(position) {
+		return this.get(position, 4);
 	}
 
 	/**
@@ -85,11 +82,10 @@ class Directions {
 	 *
 	 * Radius = 5
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 */
-	static huge(x, y) {
-		return this.get(x, y, 5);
+	static huge(position) {
+		return this.get(position, 5);
 	}
 
 	/**
@@ -97,11 +93,10 @@ class Directions {
 	 *
 	 * Radius = matrix.length
 	 *
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
+	 * @param {Position} position position
 	 */
-	static world(x, y) {
-		return this.get(x, y, this.matrix.length);
+	static world(position) {
+		return this.get(position, this.matrix.length);
 	}
 }
 
