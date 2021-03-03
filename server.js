@@ -1,11 +1,19 @@
-const { config } = require("./helper");
+const { config, empty } = require("./helper");
+
 const Golm = require("./services/Golm");
 
 const entitiesMatrix = config("entities.listMatrix");
 
 const matrix = Golm.instance.generate(entitiesMatrix);
+
+const Entity = require("./app/Entity");
+Entity.matrix = matrix;
+
 const { Collections } = require("./services/Collection");
+
 const Directions = require("./services/Directions");
+Directions.matrix = matrix;
+
 const Position = require("./services/Position");
 
 // #region SERVER
@@ -26,7 +34,6 @@ const side = config("game.side");
 
 const ground = config("entities.ground");
 const animal = config("entities.animal");
-Directions.matrix = matrix;
 
 // #region CREATE_OBJECTS
 matrix.mapMatrix((groundId, animalId, x, y) => {
@@ -62,5 +69,5 @@ io.on("connection", function (socket) {
 		Collections.run();
 	};
 
-	setInterval(main, 100);
+	setInterval(main, 500);
 });

@@ -1,7 +1,6 @@
 const Random = require("./../Random");
 const Position = require("../Position");
 const { config, empty } = require("./../../helper");
-const { Collections } = require("../Collection");
 
 const width = config("game.width");
 const height = config("game.height");

@@ -1,3 +1,4 @@
+const Config = require("./services/Config");
 const Random = require("./Services/Random");
 
 /**
@@ -52,20 +53,9 @@ const empty = (value, allowed = []) => {
 const ifElse = (value, defaultValue, allowed = []) =>
 	empty(value, allowed) ? defaultValue : value;
 
-const config = () => {
-	let cache = [];
+const config = (key, value = null) => value ? Config.set(key, value) : Config.get(key);
 
-	return key => {
-		if (empty(cache[key])) {
-			let [path, name] = key.split(".");
-			cache[key] = require("./config/" + path)[name];
-		}
-
-		return cache[key];
-	};
-};
-
-module.exports.config = config();
+module.exports.config = config;
 module.exports.empty = empty;
 module.exports.ifElse = ifElse;
 module.exports.isset = isset;

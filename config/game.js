@@ -25,6 +25,4 @@ const configs = {
 	side: 30,
 };
 
-for (let config in configs) {
-    module.exports[config] = configs[config];
-}
+for (let config in configs) module.exports[config] = configs[config];

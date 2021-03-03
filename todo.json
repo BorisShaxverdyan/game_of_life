@@ -114,12 +114,12 @@
 	},
 	{
 		"name": "Seasons",
-		"status": "planned",
+		"status": "started",
 		"description": "Create Seasons class"
 	},
 	{
 		"name": "Gender",
-		"status": "planned",
+		"status": "started",
 		"description": "Create Gender class"
 	},
 	{

@@ -1,6 +1,7 @@
-const config = require("./../helper").config;
+const config = require("../../helper").config;
 
-const Grass = require("./../app/Grass");
+const Grass = require("../../app/Grass");
+const Sheep = require("../../app/Sheep");
 
 const GROUND = 0;
 const ANIMAL = 1;
@@ -35,6 +36,15 @@ const list = [
 		color: "green",
 		stroke: 0,
 		count: 2,
+	},
+	{
+		id: 1,
+		name: "sheep",
+		object: Sheep,
+		type: ANIMAL,
+		color: "white",
+		stroke: 1,
+		count: 5,
 	},
 ];
 
